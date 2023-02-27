@@ -92,5 +92,5 @@ module.exports = {
         'vuejs-accessibility/mouse-events-have-key-events': 'off',
         'vuejs-accessibility/alt-text': 'off',
         'vue/no-mutating-props': 'off',
-    }
+    },
 }
