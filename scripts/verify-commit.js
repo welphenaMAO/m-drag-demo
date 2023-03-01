@@ -1,4 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable @typescript-eslint/no-var-requires */
 const chalk = require('chalk')
 
 const msgPath = process.argv[2]

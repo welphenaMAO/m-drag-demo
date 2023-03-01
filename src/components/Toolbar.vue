@@ -10,10 +10,10 @@
                     id="input"
                     type="file"
                     hidden
-                    @change="handleFileChange($event)"
                 />
+                <!-- @change="handleFileChange($event)" -->
             </label>
-            <el-button @click="preview(false)">预览</el-button>
+            <el-button class="preview" @click="preview(false)">预览</el-button>
             <el-button @click="save">保存</el-button>
             <el-button @click="clearCanvas">清空画布</el-button>
             <!-- :disabled="!areaData.components.length" -->
@@ -56,7 +56,7 @@ export default class Toolbar extends Vue {
     isShowPreview = false
     canvasStyleData = {
         width: 0,
-        height: 0
+        height: 0,
     }
     scale = 100
     timer = 0
@@ -87,62 +87,62 @@ export default class Toolbar extends Vue {
     }
 
     // 插入图片
-    handleFileChange(e: Event): void {
-        // const file = (e.target as HTMLInputElement).files[0]
+    // handleFileChange(e: Event): void {
+    // const file = (e.target as HTMLInputElement).files[0]
 
-        // if (!file.type.includes('image')) {
-        //     toast('只能插入图片')
-        //     return
-        // }
+    // if (!file.type.includes('image')) {
+    //     toast('只能插入图片')
+    //     return
+    // }
 
-        // const reader = new FileReader()
-        // reader.onload = (res) => {
-        //     const fileResult = (res.target as Event | null).result
-        //     const img = new Image()
-        //     img.onload = () => {
-        //         const component = {
-        //             ...commonAttr,
-        //             id: generateID(),
-        //             component: 'Picture',
-        //             label: '图片',
-        //             icon: '',
-        //             propValue: {
-        //                 url: fileResult,
-        //                 flip: {
-        //                     horizontal: false,
-        //                     vertical: false,
-        //                 },
-        //             },
-        //             style: {
-        //                 ...commonStyle,
-        //                 top: 0,
-        //                 left: 0,
-        //                 width: img.width,
-        //                 height: img.height,
-        //             },
-        //         }
+    // const reader = new FileReader()
+    // reader.onload = (res) => {
+    //     const fileResult = (res.target as Event | null).result
+    //     const img = new Image()
+    //     img.onload = () => {
+    //         const component = {
+    //             ...commonAttr,
+    //             id: generateID(),
+    //             component: 'Picture',
+    //             label: '图片',
+    //             icon: '',
+    //             propValue: {
+    //                 url: fileResult,
+    //                 flip: {
+    //                     horizontal: false,
+    //                     vertical: false,
+    //                 },
+    //             },
+    //             style: {
+    //                 ...commonStyle,
+    //                 top: 0,
+    //                 left: 0,
+    //                 width: img.width,
+    //                 height: img.height,
+    //             },
+    //         }
 
-        //         // 根据画面比例修改组件样式比例 https://github.com/woai3c/visual-drag-demo/issues/91
-        //         changeComponentSizeWithScale(component)
+    //         // 根据画面比例修改组件样式比例 https://github.com/woai3c/visual-drag-demo/issues/91
+    //         changeComponentSizeWithScale(component)
 
-        //         this.$store.commit('addComponent', { component })
-        //         this.$store.commit('recordSnapshot')
+    //         this.$store.commit('addComponent', { component })
+    //         this.$store.commit('recordSnapshot')
 
-        //         // 修复重复上传同一文件，@change 不触发的问题
-        //         $('#input').setAttribute('type', 'text')
-        //         $('#input').setAttribute('type', 'file')
-        //     }
+    //         // 修复重复上传同一文件，@change 不触发的问题
+    //         $('#input').setAttribute('type', 'text')
+    //         $('#input').setAttribute('type', 'file')
+    //     }
 
-        //     img.src = fileResult
-        // }
+    //     img.src = fileResult
+    // }
 
-        // reader.readAsDataURL(file)
-    }
+    // reader.readAsDataURL(file)
+    // }
 
     // 预览
     preview(isScreenshot: boolean) {
-        // this.isScreenshot = isScreenshot
-        // this.isShowPreview = true
+        this.isScreenshot = isScreenshot
+        this.isShowPreview = true
         // this.$store.commit('setEditMode', 'preview')
     }
 
@@ -150,7 +150,7 @@ export default class Toolbar extends Vue {
     save() {
         // localStorage.setItem("canvasData", JSON.stringify(this.componentData))
         // localStorage.setItem('canvasStyle', JSON.stringify(this.canvasStyleData))
-        this.$message.success("保存成功")
+        // this.$message.success("保存成功")
     }
 
     // 清空画布
@@ -192,9 +192,60 @@ export default class Toolbar extends Vue {
         background: #fff;
         border-bottom: 1px solid #ddd;
 
+        .preview {
+            margin-left: 10px;
+        }
+
         .canvas-config {
             display: inline-block;
             margin-left: 10px;
+            font-size: 14px;
+            color: #606266;
+
+            input {
+                width: 50px;
+                margin-left: 4px;
+                outline: none;
+                padding: 0 5px;
+                border: 1px solid #ddd;
+                color: #606266;
+            }
+
+            span {
+                margin-left: 10px;
+            }
+        }
+
+        .insert {
+            display: inline-block;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            background: #fff;
+            border: 1px solid #dcdfe6;
+            color: #606266;
+            appearance: none;
+            text-align: center;
+            box-sizing: border-box;
+            outline: 0;
+            margin: 0;
+            transition: .1s;
+            font-weight: 500;
+            padding: 9px 15px;
+            font-size: 12px;
+            border-radius: 3px;
+            margin-left: 10px;
+
+            &:active {
+                color: #3a8ee6;
+                border-color: #3a8ee6;
+                outline: 0;
+            }
+
+            &:hover {
+                background-color: #ecf5ff;
+                color: #3a8ee6;
+            }
         }
     }
 </style>

@@ -2,26 +2,28 @@ module.exports = {
     root: true,
     env: {
         node: true,
-        // "browser": true,
-        // "es2021": true
+        'browser': true,
+        'es2021': true,
     },
+    ignorePatterns: ['iconfont.js'],
     extends: [
-        'plugin:vue/recommended',
-        '@vue/airbnb',
-        // "eslint:recommended",
-        // "plugin:vue/vue3-essential",
-        // "plugin:@typescript-eslint/recommended"
+        // 'plugin:vue/recommended',
+        // '@vue/airbnb',
+        'plugin:vue/base',
+        'eslint:recommended',
+        'plugin:vue/vue3-essential',
+        'plugin:@typescript-eslint/recommended',
     ],
-    // "parser": "@typescript-eslint/parser",
+    parser: 'vue-eslint-parser',
     parserOptions: {
-        parser: '@babel/eslint-parser',
-        // "ecmaVersion": "latest",
-        // "sourceType": "module"
+        parser: '@typescript-eslint/parser',
+        // 'ecmaVersion': 'latest',
+        // 'sourceType': 'module',
     },
-    // "plugins": [
-    //     "vue",
-    //     "@typescript-eslint"
-    // ],
+    plugins: [
+        'vue',
+        '@typescript-eslint',
+    ],
     rules: {
         'no-console': 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
@@ -92,5 +94,6 @@ module.exports = {
         'vuejs-accessibility/mouse-events-have-key-events': 'off',
         'vuejs-accessibility/alt-text': 'off',
         'vue/no-mutating-props': 'off',
+        '@typescript-eslint/no-var-requires': 0,
     },
 }
