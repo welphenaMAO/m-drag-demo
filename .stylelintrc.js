@@ -17,7 +17,7 @@ module.exports = {
             customSyntax: 'postcss-html'
         },
     ],
-    ignoreFiles: ['**/*.js','**/*.jsx','**/*.ts','**/*.tsx','**/*.json'],
+    // ignoreFiles: ['**/*.js','**/*.jsx','**/*.ts','**/*.tsx','**/*.json'],
     rules: {
         indentation: [2, {
             'baseIndentLevel': 1,

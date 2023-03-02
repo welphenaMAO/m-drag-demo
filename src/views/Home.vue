@@ -22,9 +22,12 @@
             </section>
             <!-- 右侧属性列表 -->
             <section class="right">
-                <el-tabs v-model="activeName">
-                    <el-tab-pane label="属性" name="attr"></el-tab-pane>
-                    <el-tab-pane label="动画" name="animation"></el-tab-pane>
+                <el-tabs v-if="curComponent" v-model="activeName">
+                    <el-tab-pane label="属性" name="attr">
+                        <component :is="curComponent.component + 'Attr'" />
+                    </el-tab-pane>
+                    <el-tab-pane label="动画" name="animation">
+                    </el-tab-pane>
                     <el-tab-pane label="事件" name="events"></el-tab-pane>
                 </el-tabs>
             </section>
@@ -38,6 +41,13 @@ import Toolbar from '@/components/Toolbar.vue'
 import ComponentList from '@/components/ComponentList.vue'
 import RealTimeComponentList from '@/components/RealTimeComponentList.vue'
 import Editor from '@/components/Editor/index.vue'
+import { namespace } from 'vuex-class'
+const someModule = namespace('editorVuex')
+
+interface curCom {
+    component?: string;
+    [key: string]: any;
+}
 
 @Component({
     components: {
@@ -48,7 +58,11 @@ import Editor from '@/components/Editor/index.vue'
     },
 })
 export default class Home extends Vue {
+    @someModule.State(state => state.canvasStyleData) canvasStyleData: canvasTypes
+    @someModule.State(state => state.curComponent) curComponent: curCom
+
     activeName = 'attr' as string
+    // allState = getModule(canvasStyleData)
 
     handleDrop(e: Event) {
         e.preventDefault()

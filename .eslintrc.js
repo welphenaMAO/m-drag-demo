@@ -95,5 +95,8 @@ module.exports = {
         'vuejs-accessibility/alt-text': 'off',
         'vue/no-mutating-props': 'off',
         '@typescript-eslint/no-var-requires': 0,
+        'no-undef': 'off',
+        'no-var': 'error',
+        '@typescript-eslint/triple-slash-reference': ['error', { 'path': 'always', 'types': 'never', 'lib': 'never' }],
     },
 }

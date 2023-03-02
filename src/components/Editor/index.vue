@@ -4,6 +4,8 @@
         class="editor"
         :class="{ edit: isEdit }"
         :style="{
+            width: changeStyleWithScale(canvasStyleData.width) + 'px',
+            height: changeStyleWithScale(canvasStyleData.height) + 'px',
         }"
         @contextmenu="handleContextMenu"
         @mousedown="handleMouseDown"
@@ -16,6 +18,9 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Grid from './Grid.vue'
+import { changeStyleWithScale } from '@/utils/translate'
+import { namespace } from 'vuex-class'
+const someModule = namespace('editorVuex')
 
 @Component({
     components: {
@@ -23,7 +28,10 @@ import Grid from './Grid.vue'
     },
 })
 export default class Editor extends Vue {
+    @someModule.State(state => state.canvasStyleData) canvasStyleData: canvasTypes
     isEdit = false
+    changeStyleWithScale = changeStyleWithScale
+
 
     handleContextMenu(e: Event) {
         console.log('e', e)
@@ -31,6 +39,9 @@ export default class Editor extends Vue {
 
     handleMouseDown(e: Event) {
         console.log('e', e)
+    }
+    mounted() {
+        // console.log('changeStyleWithScale ??', this.changeStyleWithScale(400))
     }
 }
 </script>
