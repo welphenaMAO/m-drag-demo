@@ -46,18 +46,17 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import { namespace } from 'vuex-class'
+const editorModule = namespace('editorVuex')
 // import toast from "@/utils/toast"
 // import { commonStyle, commonAttr } from "@/custom-component/component-list"
 
 @Component
 export default class Toolbar extends Vue {
+    @editorModule.State(state => state.canvasStyleData) canvasStyleData: canvasTypes
     isShowAceEditor = false
     isScreenshot = false
     isShowPreview = false
-    canvasStyleData = {
-        width: 0,
-        height: 0,
-    }
     scale = 100
     timer = 0
 

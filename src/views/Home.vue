@@ -37,12 +37,16 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import Toolbar from '@/components/Toolbar.vue'
-import ComponentList from '@/components/ComponentList.vue'
+import Toolbar from '@/components/Toolbar.vue' // 导航栏
+import ComponentList from '@/components/ComponentList.vue' // 左侧列表组件
+import componentList from '@/custom-component/component-list' // 左侧列表数据
+import { deepCopy } from '@/utils/utils'
+import generateID from '@/utils/generateID'
 import RealTimeComponentList from '@/components/RealTimeComponentList.vue'
 import Editor from '@/components/Editor/index.vue'
 import { namespace } from 'vuex-class'
-const someModule = namespace('editorVuex')
+const editorModule = namespace('editorVuex')
+const composeModule = namespace('composeVuex')
 
 interface curCom {
     component?: string;
@@ -58,19 +62,38 @@ interface curCom {
     },
 })
 export default class Home extends Vue {
-    @someModule.State(state => state.canvasStyleData) canvasStyleData: canvasTypes
-    @someModule.State(state => state.curComponent) curComponent: curCom
+    @editorModule.State(state => state.canvasStyleData) canvasStyleData: canvasTypes
+    @editorModule.State(state => state.curComponent) curComponent: curCom
+    @composeModule.State(state => state.editor) editor: HTMLDivElement
 
     activeName = 'attr' as string
     // allState = getModule(canvasStyleData)
 
-    handleDrop(e: Event) {
+    // 拖拽结束执行
+    handleDrop(e: any) {
         e.preventDefault()
         e.stopPropagation()
+
+        const index = e.dataTransfer.getData('index')
+        const rectInfo = this.editor.getBoundingClientRect()
+
+        if(index) {
+            const component = deepCopy(componentList[index])
+            component.style.top = e.clientY - rectInfo.y
+            component.style.left = e.clientX - rectInfo.x
+            component.id = generateID()
+
+            // 根据画面比例修改组件样式比例
+            // 略
+
+            this.$store.commit('editorVuex/addComponent', { component })
+            // this.$store.commit('recordSnapshot')
+        }
     }
 
-    handleDragOver(e: Event) {
+    handleDragOver(e: any) {
         e.preventDefault()
+        e.dataTransfer.dropEffect = 'copy'
     }
 
     handleMouseDown(e: Event) {

@@ -25,6 +25,7 @@
     "echarts": "^5.4.1",
     "element-ui": "^2.15.13",
     "mathjs": "^11.6.0",
+    "nanoid": "^4.0.1",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^9.1.2",

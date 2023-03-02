@@ -24,6 +24,23 @@ export default {
         isClickComponent: false,
     },
     mutations: {
+        // aceSetcurComponent(state: any, value: any) {
+        //     for(let i = 0; i < state.componentData.length; i++) {
+        //         state.componentData.splice(i, 1)
+        //         state.curComponent = value
+        //     }
+        // },
+
+        // 拖动添加
+        addComponent(state: any, { component, index }: any) {
+            if(index !== undefined) {
+                state.componentData.splice(index, 0, component)
+            } else {
+                state.componentData.push(component)
+
+                console.log('store componentData ??', state.componentData)
+            }
+        },
     },
     actions: {
     },

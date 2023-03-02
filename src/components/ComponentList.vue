@@ -16,15 +16,12 @@
 import { Component, Vue } from 'vue-property-decorator'
 import componentList from '@/custom-component/component-list'
 
-@Component({
-    components: {
-    },
-})
+@Component
 export default class ComponentList extends Vue {
     componentList = componentList
 
-    handleDragStart(e: Event) {
-        console.log('1111', e)
+    handleDragStart(e: any) {
+        e.dataTransfer.setData('index', e.target.dataset.index)
     }
 }
 </script>
